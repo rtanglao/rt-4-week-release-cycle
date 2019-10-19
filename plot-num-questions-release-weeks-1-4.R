@@ -1,6 +1,22 @@
 library(tidyverse)
 library(lubridate)
 library(anytime)
+add_release_week_day_number <-
+  function(df_release,
+           yyyy,
+           mm,
+           dd)
+  {
+    START_DATE <-
+      make_datetime(yyyy, mm, dd, 0, 0, 0,
+                    tz = "UTC")
+    
+    return (df_release %>%
+              mutate(release_week_day_number =
+                       ((floor(interval(
+                         START_DATE, created
+                       ) / days(1))) %% 7) + 1))
+  }
 add_release_week_number <-
   function(df_release,
            yyyy,
@@ -30,8 +46,13 @@ ff65_end <- ff65_start + weeks(4)
 ff65_questions <-
   jan_aug_2019_questions %>% 
   filter(created >= ff65_start & created < ff65_end)
+# add release week number i.e. 1, 2,3, or 4
 ff65_questions <- 
-  add_release_week_number(ff65_questions, 2019,1, 29)  
+  add_release_week_number(ff65_questions, 2019,1, 29) 
+# add day of release week i.e, 1, 2, 3, 4, 5,6, 7
+ff65_questions<-
+  add_release_week_day_number(ff65_questions, 2019, 1, 29)
+
 # FF65W1D1, FF65W1D2, FF65W1D3, FF65W1D4, FF65W1D5,FF65W1D6,FF65W1D7
 # FF65W2D1, FF65W2D2, FF65W2D3, FF65W2D4, FF65W2D5,FF65W2D6,FF65W2D7
 # We want a column called "ReleaseWeekDay" with values 1-7
