@@ -65,7 +65,7 @@ ff65_week1_4_plot = ff65_week1_4_plot +
   geom_line(stat="identity") + 
   labs(color = 'Firefox 65 Week 1-4') +
   scale_x_discrete(limits = c("1", "2", "3", "4", "5", "6","7")) +
-  labs(color = 'Firefox 62 Desktop OS 5-25Sep2018') +
+  labs(color = 'FFDesktop AAQ 29Jan2019') +
   geom_dl(aes(label = release_week_number), method = list(dl.trans(x = x + 0.2), "last.points", cex = 0.8)) +
   geom_dl(aes(label = release_week_number), method = list(dl.trans(x = x - 0.2), "first.points", cex = 0.8)) +
   scale_color_brewer(palette = "Dark2")
