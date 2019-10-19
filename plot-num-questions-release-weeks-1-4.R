@@ -56,7 +56,15 @@ ff65_questions <-
   ff65_questions %>% 
   group_by(release_week_number, release_week_day_number) %>% 
   count()
-  
+ff65_week1_4_plot <- 
+  ggplot(data=ff65_questions, 
+         aes(x=release_week_day_number, y=n, group=release_week_number, 
+             colour = release_week_number))
+ff65_week1_4_plot = ff65_week1_4_plot +
+  geom_line(stat="identity") + 
+  labs(color = 'Firefox 65 Week 1-4') +
+  scale_x_discrete(limits = c("1", "2", "3", "4", "5", "6","7")) +
+  labs(color = 'Firefox 62 Desktop OS 5-25Sep2018')   
 # plot x axis: day number y axis : week number
 # FF65W1D1, FF65W1D2, FF65W1D3, FF65W1D4, FF65W1D5,FF65W1D6,FF65W1D7
 # FF65W2D1, FF65W2D2, FF65W2D3, FF65W2D4, FF65W2D5,FF65W2D6,FF65W2D7
