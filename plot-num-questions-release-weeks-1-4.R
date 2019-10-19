@@ -18,13 +18,20 @@ add_release_week_number
                        ) / days(7)) + 1))
   }
 jan_aug_2019_questions <- read_csv("https://raw.githubusercontent.com/rtanglao/rt-kitsune-api/master/01jan2019-31aug2019.csv")
-jan_aug_2019_questions <- jan_aug_2019_questions %>%
-   mutate(
-    created = as_datetime(created)
-     )
 # change created unix time to r time UTC using as_datetime()
-
+jan_aug_2019_questions <- 
+  jan_aug_2019_questions %>%
+  mutate(
+    created = as_datetime(created)
+    )
 # Firefox 65, January 29, 2019
+# remove all questions before january 29, 2019
+ff65_start <- ymd("2019-1-29", tz = "UTC")
+ff65_end <- ff65_start + weeks(4)
+ff65_questions <-
+  jan_aug_2019_questions %>% 
+  filter(created >= ff65_start & created < ff65_end)
+  
 # FF65W1D1, FF65W1D2, FF65W1D3, FF65W1D4, FF65W1D5,FF65W1D6,FF65W1D7
 # FF65W2D1, FF65W2D2, FF65W2D3, FF65W2D4, FF65W2D5,FF65W2D6,FF65W2D7
 # We want a column called "ReleaseWeekDay" with values 1-7
