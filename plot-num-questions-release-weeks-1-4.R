@@ -1,6 +1,6 @@
 library(tidyverse)
 library(lubridate)
-library(anytime)
+library(directlabels)
 add_release_week_day_number <-
   function(df_release,
            yyyy,
@@ -64,7 +64,9 @@ ff65_week1_4_plot = ff65_week1_4_plot +
   geom_line(stat="identity") + 
   labs(color = 'Firefox 65 Week 1-4') +
   scale_x_discrete(limits = c("1", "2", "3", "4", "5", "6","7")) +
-  labs(color = 'Firefox 62 Desktop OS 5-25Sep2018')   
+  labs(color = 'Firefox 62 Desktop OS 5-25Sep2018') +
+  geom_dl(aes(label = release_week_number), method = list(dl.trans(x = x + 0.2), "last.points", cex = 0.8)) +
+  geom_dl(aes(label = release_week_number), method = list(dl.trans(x = x - 0.2), "first.points", cex = 0.8))
 # plot x axis: day number y axis : week number
 # FF65W1D1, FF65W1D2, FF65W1D3, FF65W1D4, FF65W1D5,FF65W1D6,FF65W1D7
 # FF65W2D1, FF65W2D2, FF65W2D3, FF65W2D4, FF65W2D5,FF65W2D6,FF65W2D7
