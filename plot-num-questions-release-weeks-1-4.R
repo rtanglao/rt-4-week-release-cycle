@@ -1,8 +1,7 @@
 library(tidyverse)
 library(lubridate)
 library(anytime)
-add_release_week_number
-<-
+add_release_week_number <-
   function(df_release,
            yyyy,
            mm,
@@ -22,7 +21,7 @@ jan_aug_2019_questions <- read_csv("https://raw.githubusercontent.com/rtanglao/r
 jan_aug_2019_questions <- 
   jan_aug_2019_questions %>%
   mutate(
-    created = as_datetime(created)
+    created = as_datetime(created, tz = "UTC")
     )
 # Firefox 65, January 29, 2019
 # remove all questions before january 29, 2019
@@ -31,7 +30,8 @@ ff65_end <- ff65_start + weeks(4)
 ff65_questions <-
   jan_aug_2019_questions %>% 
   filter(created >= ff65_start & created < ff65_end)
-  
+ff65_questions <- 
+  add_release_week_number(ff65_questions, 2019,1, 29)  
 # FF65W1D1, FF65W1D2, FF65W1D3, FF65W1D4, FF65W1D5,FF65W1D6,FF65W1D7
 # FF65W2D1, FF65W2D2, FF65W2D3, FF65W2D4, FF65W2D5,FF65W2D6,FF65W2D7
 # We want a column called "ReleaseWeekDay" with values 1-7
