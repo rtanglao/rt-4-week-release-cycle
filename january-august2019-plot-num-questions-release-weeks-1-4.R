@@ -55,7 +55,7 @@ create_desktop_df_release_week_num_questions <-
       group_by(release_week_number, release_week_day_number) %>% 
       count()
     
-    return (add_column(release_questions, release = release))
+    add_column(release_questions, release = release)
   }
 jan_aug_2019_questions <- read_csv("https://raw.githubusercontent.com/rtanglao/rt-kitsune-api/master/01jan2019-31aug2019.csv")
 # change created unix time to r time UTC using as_datetime()
@@ -69,16 +69,23 @@ ff65_questions <- create_desktop_df_release_week_num_questions(
   jan_aug_2019_questions, "65", 2019, 1, 29)
 ff66_questions <- create_desktop_df_release_week_num_questions(
   jan_aug_2019_questions, "66", 2019, 3, 19)
+ff67_questions <- create_desktop_df_release_week_num_questions(
+  jan_aug_2019_questions, "67", 2019, 5, 21)
+ff68_questions <- create_desktop_df_release_week_num_questions(
+  jan_aug_2019_questions, "68", 2019, 7, 9)
+jan_aug_2019_questions_by_release_week <- 
+  bind_rows(ff65_questions, ff66_questions, ff67_questions, ff68_questions)
 
-ff65_week1_4_plot <- 
-  ggplot(data=ff65_questions, 
+jan_aug_2019_plot <- 
+  ggplot(data=jan_aug_2019_questions_by_release_week, 
          aes(x=release_week_day_number, y=n, group=release_week_number, 
              colour = factor(release_week_number)))
-ff65_week1_4_plot = ff65_week1_4_plot +
+jan_aug_2019_plot = jan_aug_2019_plot +
   geom_line(stat="identity") + 
-  labs(color = 'Firefox 65 Week 1-4') +
+  labs(color = 'Release Week 1-4') +
   scale_x_discrete(limits = c("1", "2", "3", "4", "5", "6","7")) +
-  labs(color = 'FFDesktop AAQ 29Jan2019') +
+  labs(color = 'DesktopAAQ65-68') +
   geom_dl(aes(label = release_week_number), method = list(dl.trans(x = x + 0.2), "last.points", cex = 0.8)) +
   geom_dl(aes(label = release_week_number), method = list(dl.trans(x = x - 0.2), "first.points", cex = 0.8)) +
-  scale_color_brewer(palette = "Dark2")
+  scale_color_brewer(palette = "Dark2")+
+  facet_wrap(~release)
