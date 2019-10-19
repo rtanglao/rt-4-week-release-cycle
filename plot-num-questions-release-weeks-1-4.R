@@ -52,7 +52,12 @@ ff65_questions <-
 # add day of release week i.e, 1, 2, 3, 4, 5,6, 7
 ff65_questions<-
   add_release_week_day_number(ff65_questions, 2019, 1, 29)
-
+ff65_questions <-
+  ff65_questions %>% 
+  group_by(release_week_number, release_week_day_number) %>% 
+  count()
+  
+# plot x axis: day number y axis : week number
 # FF65W1D1, FF65W1D2, FF65W1D3, FF65W1D4, FF65W1D5,FF65W1D6,FF65W1D7
 # FF65W2D1, FF65W2D2, FF65W2D3, FF65W2D4, FF65W2D5,FF65W2D6,FF65W2D7
 # We want a column called "ReleaseWeekDay" with values 1-7
