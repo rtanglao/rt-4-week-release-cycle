@@ -82,7 +82,7 @@ release_plot <-
          aes(x=release_week_day_number, y=n, 
              ))
 release_plot = release_plot +
-  geom_line(stat="identity") + 
+  geom_bar(stat="identity") + 
   labs(color = "incident") +
   scale_x_discrete(limits = x_axis)+
   labs(color = "incident1-31may2019") +
