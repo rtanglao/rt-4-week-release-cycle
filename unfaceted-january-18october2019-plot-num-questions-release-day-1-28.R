@@ -18,21 +18,7 @@ add_release_day_number <-
                          START_DATE, created
                        ) / days(1))) + 1))
   }
-add_release_week_number <-
-  function(df_release,
-           yyyy,
-           mm,
-           dd)
-  {
-    START_DATE <-
-      make_datetime(yyyy, mm, dd, 0, 0, 0,
-                    tz = "UTC")
-    return (df_release %>%
-              mutate(release_week_number =
-                       floor(interval(
-                         START_DATE, created
-                       ) / days(7)) + 1))
-  }
+
 create_desktop_df_release_week_num_questions <-
   function(df, release, yyyy, mm, dd)
   {
@@ -87,8 +73,8 @@ jan_18oct_2019_plot = jan_18oct_2019_plot +
   geom_line(stat="identity") + 
   labs(color = 'Release Week 1-4') +
   scale_x_discrete(limits = x_axis) +
+  coord_cartesian(clip="off") +
   labs(color = 'DesktopAAQ65-69') +
   geom_dl(aes(label = release), method = list(dl.trans(x = x + 0.2), "last.points", cex = 0.8)) +
   geom_dl(aes(label = release), method = list(dl.trans(x = x - 0.2), "first.points", cex = 0.8)) +
   scale_color_brewer(palette = "Dark2")
-  #facet_wrap(~release_week_number)
