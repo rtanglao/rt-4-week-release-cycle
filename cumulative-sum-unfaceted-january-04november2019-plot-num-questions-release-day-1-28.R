@@ -79,7 +79,7 @@ jan_04nov_2019_plot = jan_04nov_2019_plot +
   labs(color = 'Release Week 1-4') +
   scale_x_discrete(limits = x_axis) +
   coord_cartesian(clip="off") +
-  labs(color = 'DesktopAAQ65-69') +
+  labs(color = 'DesktopAAQ65-70') +
   geom_dl(aes(label = release), method = list(dl.trans(x = x + 0.2), "last.points", cex = 0.8)) +
   geom_dl(aes(label = release), method = list(dl.trans(x = x - 0.2), "first.points", cex = 0.8)) +
   scale_color_brewer(palette = "Dark2")
