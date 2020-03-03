@@ -33,6 +33,7 @@ calendar_week_ff_desktop_plot =
   geom_text(data=december2018_03mar_2020_questions, 
             x=as.numeric(as.Date("2019-05-21")), 
                         y=0, label="FF67", size=3, angle=90, 
-            vjust=-0.4, hjust=-1, colour = "hotpink") 
+            vjust=-0.4, hjust=-1, colour = "hotpink") +
+  labs(x = "product_integrity_week_start", color = "Firefox Release Week") 
   #opts(title="geom_vline", plot.title=theme_text(size=40, vjust=1.5))
   
