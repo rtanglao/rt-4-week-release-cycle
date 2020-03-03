@@ -29,5 +29,10 @@ calendar_week_ff_desktop_plot =
   geom_vline(data = december2018_03mar_2020_questions,
              aes(xintercept = as.numeric(as.Date("2019-05-21")), 
                  colour = "FF67"),
-             show.legend = TRUE)
+             show.legend = TRUE) +
+  geom_text(data=december2018_03mar_2020_questions, 
+            x=as.numeric(as.Date("2019-05-21")), 
+                        y=0, label="FF67", size=3, angle=90, 
+            vjust=-0.4, hjust=-1, colour = "pink") 
+  #opts(title="geom_vline", plot.title=theme_text(size=40, vjust=1.5))
   
