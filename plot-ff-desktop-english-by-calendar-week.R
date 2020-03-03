@@ -6,6 +6,8 @@ library(RColorBrewer)
 december2018_03mar_2020_questions <- 
   read_csv("https://raw.githubusercontent.com/rtanglao/rt-kits-api2/master/PRODUCT_INTEGRITY_4WEEK_RELEASE_CYCLE/2018-11-01-2020-03-02-num-ff-desktop-aaq-questions-created-2020-03-02.csv")
 
+# calendar week dates come from:
+# https://github.com/rtanglao/rt-kits-api2/blob/master/PRODUCT_INTEGRITY_4WEEK_RELEASE_CYCLE/2018-2021-12-19-product_integrity_dates.txt
 calendar_week_ff_desktop_plot <- 
   ggplot(
     data = december2018_03mar_2020_questions, 
